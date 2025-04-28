@@ -5,10 +5,11 @@ import { Player } from "../../types/Player";
 interface TopPlayersChartProps { 
 	title: string;
 	players: Player[]; 
-	calculateValue: (player: Player) => number | string;
+	calculateValue: (player: Player) => number | string | null;
+	label: string;
 }
 
-export function TopPlayersChart({ title, players, calculateValue }: TopPlayersChartProps) {
+export function TopPlayersChart({ title, players, calculateValue, label }: TopPlayersChartProps) {
 
 	const formattedPlayers = players
 		.map(player => ({
@@ -22,7 +23,7 @@ export function TopPlayersChart({ title, players, calculateValue }: TopPlayersCh
 				: typeof a.value === "string" && typeof b.value === "string"
 				? a.value.localeCompare(b.value)
 				: 0
-		);
+		).slice(0, 5);
 
   return (
 	<div className="bg-base-100 rounded-2xl shadow p-6 m-2">
@@ -32,7 +33,7 @@ export function TopPlayersChart({ title, players, calculateValue }: TopPlayersCh
 		  <XAxis dataKey="fullName" />
 		  <YAxis />
 		  <Tooltip />
-		  <Bar dataKey="value" fill="#79b0e8" />
+		  <Bar dataKey="value" name={label} fill="#79b0e8" />
 		</BarChart>
 	  </ResponsiveContainer>
 	</div>

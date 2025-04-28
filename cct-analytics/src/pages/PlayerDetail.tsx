@@ -1,57 +1,81 @@
 import { useLocation, useParams, Link } from "react-router-dom";
 import { Card } from "../components/ui/Card";
 import { Player } from "../types/Player";
+import { StatCard } from "../components/ui/StatCard";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { BsDashCircle } from "react-icons/bs";
+
+
 
 interface LocationState {
-  player: Player;
+	player: Player;
+	teamName: string;
 }
 
 export function PlayerDetail() {
-//   const { playerId } = useParams<{ playerId: string }>();
 
-  const location = useLocation();
-  const state = location.state as LocationState;
+	const location = useLocation();
+	const state = location.state as LocationState;
 
-  const player = state.player;
+	const player = state.player;
+	const teamName = state.teamName;
+	
+	
+	if (!player) {
+		return <p className="p-6">Player not found.</p>;
+	}
 
-  // Dummy numbers — replace with real calculation based on your games data
-	const totalLeagueGames = 50; // e.g., games.length
-	const gamesAttended = Object.values(player.attendance).filter(attended => attended).length;
+	const attendancePercentage = ((player.attendance.filter(a => a.present).length / player.attendance.length) * 100).toFixed(0);
 
-	const attendancePercent = (gamesAttended / totalLeagueGames) * 100;
+	return (
+		<div className="p-6">
+			<Link to="/players" className="btn btn-primary mb-4">← Back to Players</Link>
 
-	const goalContributions = player.stats.goalsScored + player.stats.assists;
+			<div className="p-6 grid grid-cols-1">
+				<h1 className="text-5xl font-bold text-primary justify-self-center">{`${player.firstName} ${player.lastName}`} 
+					<span className="text-3xl font-bold text-secondary justify-self-start pl-4">{`#${player.jerseyNumber}`}</span>
+				</h1>
+				<h1 className="text-3xl text-gray-500 font-thin justify-self-center mt-2">
+					{player.position}  
+				</h1>
+				<h1 className="text-3xl text-accent justify-self-center font-bold mt-2">
+					{teamName}  
+				</h1>
+			</div>
+			<div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mb-4">
+				<Card>
+					<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+						<StatCard title={"Games Played"} value={player.stats.gamesPlayed} />
+						<StatCard title={"Goals Scored"} value={player.stats.goalsScored} />
+						<StatCard title={"Goals per Game"} value={(player.stats.goalsScored / player.stats.gamesPlayed).toFixed(1)} />
+						<StatCard title={"Assists"} value={player.stats.assists} />
+						<StatCard title={"Assists per Game"} value={(player.stats.assists / player.stats.gamesPlayed).toFixed(1)} />
+						<StatCard title={"Yellow Cards"} value={player.stats.yellowCards} />
+						<StatCard title={"Red Cards"} value={player.stats.redCards} />
+						<StatCard title={"Attendance"} value={`${attendancePercentage}%`} />
+					</div>
+				</Card>
+				<Card>
+					<h2 className="text-2xl font-bold mb-2 justify-self-center">Attendance Record</h2>
+					<table className="table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Present</th>
+							</tr>
+						</thead>
+						<tbody>
+							{player.attendance.map((attendance, index) => (
+								<tr key={index} className="hover:bg-base-300">
+									<td>{attendance.date}</td>
+									<td>{attendance.present ? <BsCheckCircleFill style={{color: "green"}}/> : <BsDashCircle style={{color: "red"}}/>}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</Card>
+			</div>
 
-	// You would need team total goals to calculate real contribution %
-	// For now, you could mock it:
-	const teamTotalGoals = 100; // Pretend team scored 100 goals
-	const goalContributionPercent = (goalContributions / teamTotalGoals) * 100;
-
-
-  if (!player) {
-    return <p className="p-6">Player not found.</p>;
-  }
-
-  return (
-    <div className="p-6">
-      <Link to="/players" className="btn btn-secondary mb-4">← Back to Players</Link>
-
-      <Card>
-		<h3 className="text-2xl font-bold mb-4">Performance Metrics</h3>
-		<ul className="space-y-2 text-gray-700">
-			<li><strong>Games Played:</strong> {player.stats.gamesPlayed}</li>
-			<li><strong>Goals Scored:</strong> {player.stats.goalsScored}</li>
-			<li><strong>Assists:</strong> {player.stats.assists}</li>
-			<li><strong>Goals per Game:</strong> {(player.stats.goalsScored / player.stats.gamesPlayed).toFixed(2)}</li>
-			<li><strong>Assists per Game:</strong> {(player.stats.assists / player.stats.gamesPlayed).toFixed(2)}</li>
-			<li><strong>Attendance %:</strong> {attendancePercent.toFixed(1)}%</li>
-			<li><strong>Goal Contributions:</strong> {goalContributions}</li>
-			<li><strong>Goal Contribution % of Team:</strong> {goalContributionPercent.toFixed(1)}%</li>
-			{/* Optional */}
-			{/* <li><strong>Win Rate When Played:</strong> {winRate.toFixed(1)}%</li> */}
-		</ul>
-		</Card>
-
-    </div>
-  );
+		</div>
+	);
 }
