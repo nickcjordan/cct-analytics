@@ -6,7 +6,7 @@ interface AttendanceTrendChartProps {
 	players: Player[];
 }
 
-export function AttendanceTrendChart({players}:AttendanceTrendChartProps)  {
+export function AttendanceTrendChart({ players }: AttendanceTrendChartProps) {
 	// Calculate attendance percentages by date
 	const attendanceMap: Record<string, { attended: number; total: number }> = {};
 
@@ -21,10 +21,10 @@ export function AttendanceTrendChart({players}:AttendanceTrendChartProps)  {
 			}
 		});
 	});
-	
+
 
 	const data = Object.keys(attendanceMap)
-		.sort() 
+		.sort()
 		.map((date) => ({
 			date,
 			percentage: ((attendanceMap[date].attended / attendanceMap[date].total) * 100).toFixed(1),
@@ -36,7 +36,7 @@ export function AttendanceTrendChart({players}:AttendanceTrendChartProps)  {
 			<ResponsiveContainer width="100%" height={400}>
 				<LineChart data={data}>
 					<CartesianGrid strokeDasharray="3 3" />
-					<XAxis dataKey="date"/>
+					<XAxis dataKey="date" />
 					<YAxis domain={[0, 100]} />
 					<Tooltip />
 					<Line type="monotone" dataKey="percentage" stroke="#79b0e8" activeDot={{ r: 8 }} />

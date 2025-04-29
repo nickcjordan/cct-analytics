@@ -1,6 +1,5 @@
 const AWS = require("aws-sdk");
 
-
 const TABLE_NAME = process.env.TABLE_NAME || "LeagueData";
 
 exports.handler = async (event) => {
@@ -37,9 +36,7 @@ exports.handler = async (event) => {
 // Helper function to query DynamoDB
 async function queryByType(type) {
 
-	const dynamodb = new AWS.DynamoDB.DocumentClient({
-		region:  "us-east-1",
-	});
+	const dynamodb = new AWS.DynamoDB.DocumentClient({region:  "us-east-1"});
 
 	const params = {
 		TableName: TABLE_NAME,

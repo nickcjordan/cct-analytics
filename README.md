@@ -165,13 +165,14 @@ npm install
 ```bash
 npm run dev
 ```
+3. Open UI in Browser at `http://localhost:5173/` or [click me](http://localhost:5173/)
 
-3. Run tests:
+Testing:
+- Run tests:
 ```bash
 npm run test
 ```
-
-4. Generate coverage report:
+- Generate coverage report:
 ```bash
 npm run test:coverage
 ```
@@ -207,6 +208,15 @@ aws lambda update-function-code \
   --region YOUR_REGION
   ```
 
+Testing Lambda:
+- Run Lambda tests with coverage:
+
+From project root...
+```bash
+cd infra/terraform/lambda
+npm install
+npm run test
+```
 ---
 
 ## Testing and Coverage
@@ -233,8 +243,12 @@ aws lambda update-function-code \
 		- Load Balancer is not required for relatively low traffic so it was not implemented as part of this solution as it would have incurred unnecessary costs
 - **Caching**
 	- This is a relatively static data set (changes weekly) so the data could be cached on client side to reduce the number of API calls.
+- **Full Site Data Linking and Page Breadcrumb**
+	- There are a handful of places where I added links to individual detail pages (ex. clicking the Name in the Player page's table takes you to that Player's detail page) but there are a few places where more linking could be added
+	- With all of the page hopping, I did implement some back buttons, but adding a breadcrumb to the top of the page may help UX
 - **Authentication**
 	- Implement AWS Cognito for secure login and admin access.
+	- Can customize defaults/display based on logged in user.
 - **Additional Analytics**
 	- Add additional analytics based on what the client wants to see.
 	- I added what I thought was necessary for requirements (plus some extra) but there are still plenty of metrics/analytics I could show, especially with a larger dataset.

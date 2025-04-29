@@ -17,8 +17,8 @@ export function PlayerDetail() {
 
 	const player = state.player;
 	const teamName = state.teamName;
-	
-	
+
+
 	if (!player) {
 		return <p className="p-6">Player not found.</p>;
 	}
@@ -30,14 +30,14 @@ export function PlayerDetail() {
 			<Link to="/players" className="btn btn-primary mb-4">← Back to Players</Link>
 
 			<div className="p-6 grid grid-cols-1">
-				<h1 className="text-5xl font-bold text-primary justify-self-center">{`${player.firstName} ${player.lastName}`} 
+				<h1 className="text-5xl font-bold text-primary justify-self-center">{`${player.firstName} ${player.lastName}`}
 					<span className="text-3xl font-bold text-secondary justify-self-start pl-4">{`#${player.jerseyNumber}`}</span>
 				</h1>
 				<h1 className="text-3xl text-gray-500 font-thin justify-self-center mt-2">
-					{player.position}  
+					{player.position}
 				</h1>
 				<h1 className="text-3xl text-accent justify-self-center font-bold mt-2">
-					{teamName}  
+					{teamName}
 				</h1>
 			</div>
 			<div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mb-4">
@@ -66,7 +66,7 @@ export function PlayerDetail() {
 							{player.attendance.map((attendance, index) => (
 								<tr key={index} className="hover:bg-base-300">
 									<td>{attendance.date}</td>
-									<td>{attendance.present ? <BsCheckCircleFill style={{color: "green"}}/> : <BsDashCircle style={{color: "red"}}/>}</td>
+									<td>{attendance.present ? <BsCheckCircleFill style={{ color: "green" }} /> : <BsDashCircle style={{ color: "red" }} />}</td>
 								</tr>
 							))}
 						</tbody>

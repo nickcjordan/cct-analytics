@@ -25,27 +25,27 @@ export function Dashboard() {
 			<StatCard title={"Average Deficit"} value={averageScoreDeficit.toFixed(1)} description={"more goals scored by winner"} />
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-2">
-				<TopPlayersChart players={players} title={"Top Scorers"} calculateValue={(player: Player) => player.stats.goalsScored} label={"Goals"}/>
+				<TopPlayersChart players={players} title={"Top Scorers"} calculateValue={(player: Player) => player.stats.goalsScored} label={"Goals"} />
 			</div>
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-2">
-				<TopPlayersChart players={players} title={"Top Play Makers"} calculateValue={(player: Player) => player.stats.assists} label={"Assists"}/>
-			</div>
-			
-			<div className="col-span-1 md:col-span-2 lg:col-span-2">
-				<TopPlayersChart players={players} title={"Top Contributors"} calculateValue={(player: Player) => player.stats.assists + player.stats.goalsScored} label={"Goal Contributions"}/>
+				<TopPlayersChart players={players} title={"Top Play Makers"} calculateValue={(player: Player) => player.stats.assists} label={"Assists"} />
 			</div>
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-2">
-				<TopPlayersChart players={players} title={"Best Attendance"} calculateValue={(player: Player) => player.stats.gamesPlayed} label={"Games Played"}/>
+				<TopPlayersChart players={players} title={"Top Contributors"} calculateValue={(player: Player) => player.stats.assists + player.stats.goalsScored} label={"Goal Contributions"} />
+			</div>
+
+			<div className="col-span-1 md:col-span-2 lg:col-span-2">
+				<TopPlayersChart players={players} title={"Best Attendance"} calculateValue={(player: Player) => player.stats.gamesPlayed} label={"Games Played"} />
 			</div>
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-4">
-				<AttendanceTrendChart players={players}/>
+				<AttendanceTrendChart players={players} />
 			</div>
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-4">
-				<TeamStandingsTable teams={teams} players={players}/>
+				<TeamStandingsTable teams={teams} players={players} />
 			</div>
 		</div>
 	);

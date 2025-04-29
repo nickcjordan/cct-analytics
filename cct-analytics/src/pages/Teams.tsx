@@ -9,13 +9,13 @@ export function Teams() {
 	if (loading) return <p className="p-6">Loading...</p>;
 	if (error) return <p className="p-6 text-red-500">Error: {error}</p>;
 
-	const teamsByDivision = teams.reduce((acc: Record<string, Team[]>, team: Team) => {
+	const teamsByDivision = teams.reduce((records: Record<string, Team[]>, team: Team) => {
 		const division = team.division;
-		if (!acc[division]) {
-			acc[division] = [];
+		if (!records[division]) {
+			records[division] = [];
 		}
-		acc[division].push(team);
-		return acc;
+		records[division].push(team);
+		return records;
 	}, {} as Record<string, Team[]>);
 
 	return (
@@ -27,10 +27,9 @@ export function Teams() {
 				{Object.entries(teamsByDivision).map(([division, teamsList]) => (
 					<div key={division} className="mb-6">
 						<h2 className="text-2xl font-semibold mb-2">{division + " Division"}</h2>
-							<TeamsTable teams={teamsList} players={players} />
+						<TeamsTable teams={teamsList} players={players} />
 					</div>
 				))}
-				
 			</div>
 		</div>
 	);

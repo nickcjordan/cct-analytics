@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 interface PlayersTableProps {
 	players: Player[];
-	getTeamName: (teamId: string) => string; // Function to get team name by ID
+	getTeamName: (teamId: string) => string;
 }
 
 export function PlayersTable({ players, getTeamName }: PlayersTableProps) {
@@ -30,7 +30,9 @@ export function PlayersTable({ players, getTeamName }: PlayersTableProps) {
 						<tr className="hover:bg-base-200" key={player.id}>
 							<td>{player.jerseyNumber}</td>
 							<td className="font-semibold text-secondary underline">
-								<Link className="w-full" to={`/players/${player.id}`} key={player.id} state={{ player: player, teamName: getTeamName(player.teamId) }}>{`${player.firstName} ${player.lastName}`}</Link>
+								<Link className="w-full" to={`/players/${player.id}`} key={player.id} state={{ player: player, teamName: getTeamName(player.teamId) }}>
+									{`${player.firstName} ${player.lastName}`}
+								</Link>
 							</td>
 							<td>{player.age}</td>
 							<td>{player.position}</td>

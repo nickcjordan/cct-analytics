@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Team } from "../../types/Team";
 import { Player } from "../../types/Player";
 
-interface TeamsTableProps { 
+interface TeamsTableProps {
 	teams: Team[];
 	players: Player[];
 }

@@ -6,13 +6,13 @@ export function Games() {
 	const { games, players, teams, loading, error } = useLeague();
 
 	const sortedGames = [...games].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-	const gamesByDate = sortedGames.reduce((acc, game) => {
+	const gamesByDate = sortedGames.reduce((records, game) => {
 		const date = new Date(game.date).toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit", timeZone: "UTC" });
-		if (!acc[date]) {
-			acc[date] = [];
+		if (!records[date]) {
+			records[date] = [];
 		}
-		acc[date].push(game);
-		return acc;
+		records[date].push(game);
+		return records;
 	}, {} as Record<string, typeof games>);
 
 	if (loading) return <p className="p-6">Loading...</p>;

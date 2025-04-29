@@ -6,9 +6,9 @@ import { WiCloudy } from "react-icons/wi";
 import { StatCard } from "../ui/StatCard";
 
 interface GameResultDetailProps {
-    game: Game;
-    getTeamName: (teamId: string) => string;
-    getPlayername: (playerId: string) => string;
+	game: Game;
+	getTeamName: (teamId: string) => string;
+	getPlayername: (playerId: string) => string;
 }
 
 function filterScorersByTeam(scorers: { playerId: string; goals: number; team: string }[], teamId: string) {
@@ -91,5 +91,5 @@ export function GameResultDetail({ game, getTeamName, getPlayername }: GameResul
 			</div>
 
 		</Card>
-  );
+	);
 }
