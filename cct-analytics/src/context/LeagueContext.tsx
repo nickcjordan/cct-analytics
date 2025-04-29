@@ -53,9 +53,5 @@ export function LeagueProvider({ children }: { children: ReactNode }) {
 }
 
 export function useLeague() {
-	const context = useContext(LeagueContext);
-	if (!context) {
-		throw new Error("useLeague must be used within a LeagueProvider");
-	}
-	return context;
+	return useContext(LeagueContext);
 }

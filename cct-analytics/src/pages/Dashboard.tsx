@@ -3,6 +3,7 @@ import { StatCard } from "../components/ui/StatCard";
 import { TeamStandingsTable } from "../components/tables/TeamStandingsTable";
 import { TopPlayersChart } from "../components/charts/TopPlayersChart";
 import { Player } from "../types/Player";
+import { AttendanceTrendChart } from "../components/charts/AttendanceTrendChart";
 
 export function Dashboard() {
 	const { games, players, teams, loading, error } = useLeague();
@@ -37,6 +38,10 @@ export function Dashboard() {
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-2">
 				<TopPlayersChart players={players} title={"Best Attendance"} calculateValue={(player: Player) => player.stats.gamesPlayed} label={"Games Played"}/>
+			</div>
+
+			<div className="col-span-1 md:col-span-2 lg:col-span-4">
+				<AttendanceTrendChart players={players}/>
 			</div>
 
 			<div className="col-span-1 md:col-span-2 lg:col-span-4">

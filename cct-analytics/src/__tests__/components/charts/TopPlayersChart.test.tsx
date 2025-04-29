@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { TopPlayersChart } from "../../components/charts/TopPlayersChart";
-import { Player } from "../../types/Player";
+import { TopPlayersChart } from "../../../components/charts/TopPlayersChart";
+import { Player } from "../../../types/Player";
 
 describe("TopPlayersChart", () => {
 	const mockPlayers: Player[] = [

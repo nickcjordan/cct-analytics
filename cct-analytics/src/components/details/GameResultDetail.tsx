@@ -19,13 +19,13 @@ function getWeatherIcon(weather: string) {
 	// need the rest of the allowed values for full implementation 
 	switch (weather) {
 		case "Sunny":
-			return <WiDaySunny className="text-yellow-500 text-6xl" />;
+			return <WiDaySunny title="Sunny" className="text-yellow-500 text-6xl" />;
 		case "Cloudy":
-			return <WiDayCloudy className="text-gray-300 text-6xl" />;
+			return <WiDayCloudy title="Cloudy" className="text-gray-300 text-6xl" />;
 		case "Partly Cloudy":
-			return <WiCloudy className="text-gray-400 text-6xl" />;
+			return <WiCloudy title="Partly Cloudy" className="text-gray-400 text-6xl" />;
 		default:
-			return null;
+			return <div title="unknown-weather">{weather}</div>;
 	}
 }
 

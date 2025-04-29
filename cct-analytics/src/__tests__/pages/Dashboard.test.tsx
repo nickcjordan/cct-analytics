@@ -4,6 +4,9 @@ import { useLeague } from "../../context/LeagueContext";
 import { LeagueProvider } from "../../context/LeagueContext";
 import { vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
+import { Game } from "../../types/Game";
+import { Player } from "../../types/Player";
+import { Team } from "../../types/Team";
 
 
 vi.mock("../../context/LeagueContext", () => ({
@@ -52,14 +55,33 @@ describe("Dashboard", () => {
 	it("renders dashboard with stats and charts", () => {
 		(useLeague as vi.Mock).mockReturnValue({
 			games: [
-				{ attendance: 100, homeScore: 2, awayScore: 1 },
-				{ attendance: 200, homeScore: 3, awayScore: 2 },
-			],
+				buildGame("game-001"),
+				buildGame("game-002"),
+			].map((game, index) => ({
+				...game,
+				attendance: index === 0 ? 100 : 200,
+				homeScore: index === 0 ? 2 : 3,
+				awayScore: index === 0 ? 1 : 2,
+			})),
 			players: [
-				{ stats: { goalsScored: 5, assists: 3, gamesPlayed: 10 } },
-				{ stats: { goalsScored: 2, assists: 4, gamesPlayed: 8 } },
-			],
-			teams: [{ name: "Team A" }, { name: "Team B" }],
+				buildPlayer("player-001"),
+				buildPlayer("player-002"),
+			].map((player, index) => ({
+				...player,
+				stats: {
+					...player.stats,
+					goalsScored: index === 0 ? 5 : 2,
+					assists: index === 0 ? 3 : 4,
+					gamesPlayed: index === 0 ? 10 : 8,
+				},
+			})),
+			teams: [
+				buildTeam("team-001"),
+				buildTeam("team-002"),
+			].map((team, index) => ({
+				...team,
+				name: index === 0 ? "Team A" : "Team B",
+			})),
 			loading: false,
 			error: null,
 		});
@@ -90,4 +112,57 @@ function expectValueFromStatCard(title: string, value: string) {
 	expect(screen.getByText(title)).toBeInTheDocument();
 	const totalGamesPlayedNode = screen.getByText(title).nextSibling;
 	expect(totalGamesPlayedNode).toHaveTextContent(value);
+}
+
+
+function buildGame(id: string): Game {
+	return {
+		id: id,
+		date: "2023-09-05",
+		homeTeam: "team-001",
+		awayTeam: "team-002",
+		homeScore: 3,
+		awayScore: 2,
+		location: "",
+		division: "",
+		attendance: 0,
+		weatherConditions: "",
+		scorers: [],
+		referees: []
+	}
+}
+
+function buildPlayer(id: string): Player {
+	return {
+		id: id,
+		firstName: "First " + id,
+		lastName: "Last " + id,
+		stats: {
+			goalsScored: 0,
+			assists: 0,
+			gamesPlayed: 0,
+			yellowCards: 0,
+			redCards: 0
+		},
+		age: 0,
+		position: "",
+		jerseyNumber: 0,
+		teamId: "",
+		attendance: []
+	}
+}
+
+function buildTeam(id: string): Team {
+	return {
+		id: id,
+		name: "Team " + id,
+		division: "",
+		coach: "",
+		players: [],
+		wins: 0,
+		losses: 0,
+		ties: 0,
+		pointsScored: 0,
+		pointsAllowed: 0,
+	}
 }

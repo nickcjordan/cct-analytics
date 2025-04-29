@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { TeamStandingsTable } from "../../components/tables/TeamStandingsTable";
-import { Team } from "../../types/Team";
-import { Player } from "../../types/Player";
+import { TeamStandingsTable } from "../../../components/tables/TeamStandingsTable";
+import { Team } from "../../../types/Team";
+import { Player } from "../../../types/Player";
 
 describe("TeamStandingsTable", () => {
 	const mockTeams: Team[] = [
