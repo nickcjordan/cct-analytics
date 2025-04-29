@@ -22,12 +22,12 @@ Engineer: **Nick Jordan**
 - Although AWS CDK was the preferred technology for IaC, I decided to use Terraform as this is what I use in my current role
 	- I am confident I could have taken the time to learn AWS CDK, but in the interest of time I went with what I know
 - I have verified that the commands `terraform init` and `terraform plan` execute successfully, but to fully verify functionality I would need to do a full deployment
-	- I have decided that for the purpose of this excercise, I am not going to *actually* deploy to AWS, but instead just have the files prepared as if it was deployable (I assume this was the intent)
+	- I have decided that for the purpose of this exercise, I am not going to *actually* deploy to AWS, but instead just have the files prepared as if it was deployable (I assume this was the intent)
 - The terraform I wrote is for the bare minimum to illustrate the base required architecture. In a production setting, here are some things I would do differently:
-	- regional resources would be refactored into it's own terraform module
-	- regional resources would be deployed using a multi region approach for redundancy
+	- Regional resources would be refactored into its own terraform module
+	- Regional resources would be deployed using a multi-region approach for redundancy
 	- API Gateway would be configured with a custom domain using Route53
-	- API Gateway would be configured with healthcheck that initiates failover to redundant region
+	- API Gateway would be configured with health check that initiates failover to redundant region
 	- API Gateway would be configured with proper authentication
 	- API Gateway would be configured to deploy multiple stages for different environments (ex. test, qc, prod)
 	- Lambda would be built with Lambda Alias to assist with versioning strategy with API 
@@ -42,7 +42,7 @@ Engineer: **Nick Jordan**
 ### Testing
 - Although I have 100% coverage with existing tests, in a production setting I would have written a separate integration/end-to-end test suite using something like Cypress
 	- The existing tests do not test the browser's rendering of the React components and rely on rendering components within the scope of the test
-	- A browser based test suite would give more confidence in test quality 
+	- A browser-based test suite would give more confidence in test quality 
 
 ---
 
@@ -54,7 +54,7 @@ Engineer: **Nick Jordan**
 | Styling       | TailwindCSS, DaisyUI               | Rapid, responsive design with minimal custom CSS            |
 | Data Visualization       | Recharts               | Easy implementation, responsive, dynamic            |
 | State Management | React Context API + Custom Hooks | Lightweight, scalable for current application size          |
-| Fontend Testing       | Vitest, React Testing Library       | Fast unit/integration testing with minimal overhead         |
+| Frontend Testing       | Vitest, React Testing Library       | Fast unit/integration testing with minimal overhead         |
 | Backend       | AWS Lambda, DynamoDB, API Gateway   | Serverless, auto-scaling, optimized for large datasets      |
 | Backend Testing       | Jest       | Fast unit/integration testing with minimal overhead         |
 | Infrastructure| Terraform                           | Reliable, repeatable infrastructure deployment              |
@@ -103,7 +103,7 @@ Engineer: **Nick Jordan**
   TailwindCSS purges unused classes during build — this leads to a much smaller final CSS bundle than traditional frameworks.
 
 - **Utility-First Styling**  
-  Tailwind avoids creating complex CSS rulesheets — styles are scoped to markup, reducing style recalculation and reflows.
+  Tailwind avoids creating complex CSS style sheets — styles are scoped to markup, reducing style recalculation and reflows.
 
 - **Responsive Design with Tailwind**  
   Tailwind’s breakpoint classes ensure optimized rendering for mobile, tablet, and desktop without separate layout logic.
@@ -143,9 +143,6 @@ Engineer: **Nick Jordan**
 
 - **Pagination-Ready Frontend Architecture**  
   Although current data is loaded in bulk, the frontend architecture allows for easy implementation of future pagination or infinite scroll, enabling user interfaces to handle millions of records efficiently.
-
-- **Lightweight Component Rendering**  
-  Frontend visualizations (e.g., tables, charts) are componentized and memoized where appropriate, allowing the UI to remain performant as data scales.
 
 - **Infrastructure as Code for Consistency**  
   Terraform ensures consistent, repeatable deployments across environments — critical when scaling to multiple environments (dev, test, prod) or managing growing infrastructure needs.
@@ -240,7 +237,7 @@ aws lambda update-function-code \
 	- Implement AWS Cognito for secure login and admin access.
 - **Additional Analytics**
 	- Add additional analytics based on what the client wants to see.
-	- I added what I thought was necessary for requirements (plus some extra) but there is still plenty of metrics/analytics I could show, especially with a larger dataset.
+	- I added what I thought was necessary for requirements (plus some extra) but there are still plenty of metrics/analytics I could show, especially with a larger dataset.
 - **Admin Interface**
 	- Web interface for managing teams, players, and games.
 - **Aesthetics Customization**
@@ -250,7 +247,7 @@ aws lambda update-function-code \
 	- Ability to sort tables by columns
 	- Full site text search to easily find a specific player, team, etc
 	- Ability for user to provide a filter to scope Dashboard metrics (ex. filter top scorers by players on "Thunderbolts" team instead of all players)
-	- Ability for users to export league data to CSV, Excel, PDF, etc for offline ditribution/analysis (player stats, game results, etc)
+	- Ability for users to export league data to CSV, Excel, PDF, etc for offline distribution/analysis (player stats, game results, etc)
 - **Pagination and Infinite Scrolling**  
   	- Implement paginated API responses and frontend infinite scrolling to efficiently handle millions of player, game, and team records.
 	- Will be more important as the data set grows.
@@ -262,5 +259,5 @@ aws lambda update-function-code \
 	- Integrate tools into frontend and backend for proper monitoring/alerting
 		- Logs: AWS CloudWatch, Splunk
 		- Tracing: AWS XRay, Dynatrace
-		- Alerting: AWS Clouwatch + SNS, Splunk, Dynatrace
+		- Alerting: AWS CloudWatch + SNS, Splunk, Dynatrace
 	- Automatic alerts would be setup to trigger on certain metrics or error logs 
