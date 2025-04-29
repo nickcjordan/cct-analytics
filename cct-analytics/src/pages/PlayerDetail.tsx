@@ -1,11 +1,9 @@
-import { useLocation, useParams, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Card } from "../components/ui/Card";
 import { Player } from "../types/Player";
 import { StatCard } from "../components/ui/StatCard";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BsDashCircle } from "react-icons/bs";
-
-
 
 interface LocationState {
 	player: Player;

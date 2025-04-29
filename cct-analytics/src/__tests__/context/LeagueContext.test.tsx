@@ -86,8 +86,24 @@ describe("LeagueContext", () => {
 			expect(screen.getByText(/error/i)).toBeInTheDocument();
 			expect(screen.getByText(/An unknown error occurred./i)).toBeInTheDocument();
 		});
+
+		
 	});
 
+	it("handles unknown errors gracefully", async () => {
+		mockedLeagueData.getGames.mockRejectedValueOnce(null); // Simulate an unknown error
+		mockedLeagueData.getPlayers.mockResolvedValue([]);
+		mockedLeagueData.getTeams.mockResolvedValue([]);
+
+		try {
+			render(
+					<TestConsumer />
+			);
+		} catch (e: any) {
+			expect(e.message).toBe("useLeague must be used within a LeagueProvider");
+		}
+
+	});
 });
 
 function buildGame(id: string): Game {

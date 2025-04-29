@@ -9,14 +9,14 @@ export function Teams() {
 	if (loading) return <p className="p-6">Loading...</p>;
 	if (error) return <p className="p-6 text-red-500">Error: {error}</p>;
 
-	const teamsByDivision = teams.reduce((acc: any, team: Team) => {
+	const teamsByDivision = teams.reduce((acc: Record<string, Team[]>, team: Team) => {
 		const division = team.division;
 		if (!acc[division]) {
 			acc[division] = [];
 		}
 		acc[division].push(team);
 		return acc;
-	}, {});
+	}, {} as Record<string, Team[]>);
 
 	return (
 		<div className="mx-auto p-6">

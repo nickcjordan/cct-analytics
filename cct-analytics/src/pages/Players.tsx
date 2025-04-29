@@ -10,7 +10,6 @@ export function Players() {
 	players.sort((a, b) => a.lastName.localeCompare(b.lastName));
 
 	function getTeamName(teamId: string): string {
-		console.log("teamId", teamId);
 		const team = teams.find((team) => team.id === teamId);
 		return team ? team.name : teamId;
 	}
