@@ -1,5 +1,7 @@
 # Youth Sports League Analytics Dashboard
-Project completed by Nick Jordan 
+Engineer: **Nick Jordan**
+
+# ***All documentation can be found in this README except for the Application Diagram, found in `diagrams` folder***
 
 ## Clarifying Decisions / Assumptions
 
@@ -212,32 +214,34 @@ aws lambda update-function-code \
 
 ## Testing and Coverage
 
-- **Unit Tests**:
+- **Unit Tests**
   - `LeagueContext` (data layer)
   - Component tests (e.g., `TeamStandingsTable`)
   - Jest tests for lambda code
-- **Integration Tests**:
+- **Integration Tests**
   - Full-page test coverage for `Dashboard`, `Players`, `Games`, etc.
-- **Mocked Data Layer**:
+- **Mocked Data Layer**
   - Tests use mocked API responses for deterministic results.
-- **Code Coverage**:
+- **Code Coverage**
   - Maintained 100%, with coverage reports generated via Vitest and v8.
 
 ---
 
 ## Future Enhancements
 
-- **UI Architecture**
+- **Architecture Enhancements**
 	- Deploying with a CloudFront distribution would be ideal for a number of reasons, but for the sake of time and sticking to requirements I did not implement this.
-	- This would be one of the first things I would work on next (after wiring up the frontend to an actual deployed API instead of mocked JSON data).
+		- This would be one of the first things I would work on next (after wiring up the frontend to an actual deployed API instead of mocked JSON data).
+	- Deploying API Gateway with a Load Balancer would help with performance if traffic was to increase exponentially
+		- Load Balancer is not required for relatively low traffic so it was not implemented as part of this solution as it would have incurred unnecessary costs
 - **Caching**
 	- This is a relatively static data set (changes weekly) so the data could be cached on client side to reduce the number of API calls.
-- **Authentication**: 
+- **Authentication**
 	- Implement AWS Cognito for secure login and admin access.
-- **Additional Analytics**: 
+- **Additional Analytics**
 	- Add additional analytics based on what the client wants to see.
 	- I added what I thought was necessary for requirements (plus some extra) but there is still plenty of metrics/analytics I could show, especially with a larger dataset.
-- **Admin Interface**: 
+- **Admin Interface**
 	- Web interface for managing teams, players, and games.
 - **Aesthetics Customization**
 	- Select a theme that aligns with individual team colors or the city/school district's branded colors.
